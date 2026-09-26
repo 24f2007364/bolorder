@@ -1,0 +1,32 @@
+# Free online demonstration. Filesystem resets on restarts/redeploys.
+# For retained orders, attach a paid persistent disk before using real data.
+services:
+  - type: web
+    name: bolorder
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1 --proxy-headers
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PUBLIC_DEPLOYMENT
+        value: "true"
+      - key: APP_ACCESS_PASSWORD
+        generateValue: true
+      - key: SARVAM_API_KEY
+        sync: false
+      - key: DEMO_MODE
+        value: "false"
+      - key: DATABASE_PATH
+        value: /tmp/bolorder.sqlite3
+      - key: SARVAM_STT_MODEL
+        value: saaras:v4
+      - key: SARVAM_CHAT_MODEL
+        value: sarvam-105b
+      - key: SARVAM_TTS_MODEL
+        value: bulbul:v3
