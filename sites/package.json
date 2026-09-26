@@ -1,0 +1,1 @@
+{"name":"bolorder-sites","private":true,"type":"module","scripts":{"build":"node build.mjs","test":"node --test tests/*.test.mjs","dev":"node preview.mjs","db:generate":"drizzle-kit generate"},"dependencies":{"drizzle-orm":"^0.44.5"},"devDependencies":{"drizzle-kit":"^0.31.4","esbuild":"^0.25.9"}}
